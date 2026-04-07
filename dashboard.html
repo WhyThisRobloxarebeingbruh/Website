@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+
+<body>
+
+  <h1>Dashboard</h1>
+
+  <div id="user"></div>
+
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    netlifyIdentity.on("init", user => {
+      if (!user) {
+        // NOT logged in → kick back
+        window.location.href = "/";
+      } else {
+        document.getElementById("user").innerHTML =
+          "Welcome: " + user.email;
+      }
+    });
+
+    function logout() {
+      netlifyIdentity.logout();
+      window.location.href = "/";
+    }
+  </script>
+
+</body>
+</html>
